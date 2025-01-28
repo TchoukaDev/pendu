@@ -13,7 +13,7 @@
         <div id="motCachePendu">
             <div id="motCache"></div>
          <div id= "pendu">
-            <img src="images/pendu0.jpg" type= "image/jpg" alt="Image du pendu">
+            <img id= "imagePendu" src="images/pendu10.jpg" type= "image/jpg" alt="Image du pendu">
          </div>
         </div> 
         <div id="bienvenue">
@@ -27,10 +27,10 @@
             <input type = "submit" id="validerPrenom" value = "Valider">
         </form>
 
-        <div id = "saisiesChangerMot">
+        <div id = "saisiesTentativesChanger">
             <div id = "inputSaisies">
                 <label for= "saisirLettre"> Essaie une lettre: </label>
-                <input type = text name = saisirLettre id = saisirLettre>
+                <input type = text name = saisirLettre maxlength="1" id = saisirLettre>
                 <button id="validerLettre">Valider</button>
                 <p>ou</p>
                 <label for="SaisirMot">Propose un mot: </label>
@@ -38,6 +38,7 @@
                 <button id="validerMot">Valider</button>
                 <div id = "erreurSaisie"></div>
             </div>
+            <div id = "tentativesRestantes"></div>
             <div id="changerMot"></div>
         </div>
         <div id = "lettreSaisies"></div>

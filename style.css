@@ -79,10 +79,16 @@ form {
     flex-basis: 180px;
 }
 
-#saisiesChangerMot {
+#tentativesRestantes {
+    padding: 30px;
+    flex-grow: 1;
+}
+
+#saisiesTentativesChanger {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
     margin: 20px
 }
 
