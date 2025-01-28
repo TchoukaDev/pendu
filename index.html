@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu du pendu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+</head>
+<body>
+    <div class= container>
+        <div id="motCachePendu">
+            <div id="motCache"></div>
+         <div id= "pendu">
+            <img src="images/pendu0.jpg" type= "image/jpg" alt="Image du pendu">
+         </div>
+        </div> 
+        <div id="bienvenue">
+            Bienvenue dans ce jeu du pendu interactif!
+        </div>
+
+        <form>
+            <label for ="prenomUtilisateur">Pour commencer, saisissez votre prénom:</label>
+            <input type="text" name="prenomUtilisateur" id="prenomUtilisateur" placeholder="Votre prénom" required><br>
+            <p id = "erreurPrenom"></p>
+            <input type = "submit" id="validerPrenom" value = "Valider">
+        </form>
+
+        <div id = "saisiesChangerMot">
+            <div id = "inputSaisies">
+                <label for= "saisirLettre"> Essaie une lettre: </label>
+                <input type = text name = saisirLettre id = saisirLettre>
+                <button id="validerLettre">Valider</button>
+                <p>ou</p>
+                <label for="SaisirMot">Propose un mot: </label>
+                <input type="text" name="saisirMot" id="saisirMot">
+                <button id="validerMot">Valider</button>
+                <div id = "erreurSaisie"></div>
+            </div>
+            <div id="changerMot"></div>
+        </div>
+        <div id = "lettreSaisies"></div>
+        <div id = "regles">
+            Devine le mot caché portant sur le thème des jeux vidéos.<br> 
+            Pour cela, saisis une lettre dans la case prévue à cet effet.<br>
+            Si la lettre est présente dans le mot caché, elle va s'afficher aux endroits où elle se trouver. Si elle n'est pas présente, tu perds un essai.<br>
+            Si tu penses avoir deviné le mot, tu peux le saisir dans la case correspondante. 
+            Si c'est le bon mot tu gagnes, sinon tu perds un essai.<br>
+            Attention à ne pas gaspiller tes essais car leur nombre est limité. Si tu n'as pas trouvé le mot après 10 tentatives, tu perds la partie. Amuse-bien et bonne chance!
+        </div>
+        <button id="finRegles">Allons-y</button>
+    </div>
+<script src="main.js"></script>    
+</body>
+</html>

@@ -1,0 +1,107 @@
+html, body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url(images/background.avif) center /cover no-repeat;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto, auto;
+    padding: 30px;
+    width: 1100px;
+    text-align: center;
+    background: linear-gradient(45deg, silver, white);
+    border: 2px solid blue;
+    border-radius: 15px;
+}
+
+#motCachePendu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#motCache {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.hidden{
+    display: inline-block;
+    text-align: center;
+    color: transparent;
+    border-bottom: 2px solid black;
+    margin: 15px;
+    width: 20px;
+    font-size: 3em;
+}
+
+#pendu {
+    display: none;
+}
+
+#pendu img{
+    height: 200px;
+}
+
+#bienvenue {
+    margin: 50px;
+    padding: 20px;
+    font-size: 2em;
+    font-weight: bold;
+
+}
+
+form {
+    padding: 20px;
+    font-size: 1.5em;
+}
+
+#prenomUtilisateur {
+    margin-bottom: 40px;
+    font-size: 24px;
+}
+
+#validerPrenom {
+    font-size: 1em;
+    padding: 5px;
+}
+
+#inputSaisies {
+    display: none;
+    flex-grow: 1;
+}
+
+#changerMot {
+    flex-basis: 180px;
+}
+
+#saisiesChangerMot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px
+}
+
+#regles {
+    text-align: justify;
+    font-size: 1.5em;
+    display: none;
+}
+
+.toggleRegles {
+    margin: 20px;
+    padding: 5px 10px;
+    width: 150px;
+}
+
+#finRegles {
+    display: none;
+    margin: 30px auto;
+    font-size: 1.3em;
+}
+
+
