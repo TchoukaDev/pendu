@@ -11,43 +11,57 @@
 <body>
     <div class= container>
         <div id="motCachePendu">
-            <div id="motCache"></div>
+            <div id="containerMotCache">
+                <div id="motCache"></div>
+            </div>
          <div id= "pendu" class = "hidden">
             <img id= "imagePendu" src="images/pendu10.jpg" type= "image/jpg" alt="Image du pendu">
          </div>
         </div> 
-        <div id="bienvenue">
+        <div id="bienvenue" class="containerSecondaire">
             Bienvenue dans ce jeu du pendu interactif!
         </div>
 
-        <form>
+        <form id="formulaire" class="containerSecondaire">
             <label for ="prenomUtilisateur">Pour commencer, saisissez votre prénom:</label>
             <input type="text" name="prenomUtilisateur" id="prenomUtilisateur" placeholder="Votre prénom" required><br>
             <p id = "erreurPrenom"></p>
-            <input type = "submit" id="validerPrenom" class = "bouton" value = "Valider">
+            <input type = "submit" id="validerPrenom" class = "bouton hover" value = "Valider">
         </form>
 
         <div id = "saisiesTentativesChanger">
             <div id = "inputSaisies" class="hidden">
-                <div>
-                    <label for= "saisirLettre"> Essaie une lettre: </label>
-                    <input type = text name = saisirLettre maxlength="1" id = saisirLettre>
+                <div id ="containerSaisir">
+                    <div class = saisir>
+                        <label for= "saisirLettre"> Essaie une lettre: </label>
+                        <input type = text name = saisirLettre maxlength="1" id = saisirLettre>
+                    </div>
+                    <div class = saisies>
+                        <label for="SaisirMot">Propose un mot: </label>
+                        <input type="text" name="saisirMot" id="saisirMot">
+                    </div>
+                    <div id = "erreurSaisie"></div>
                 </div>
                 <div>
-                    <label for="SaisirMot">Propose un mot: </label>
-                    <input type="text" name="saisirMot" id="saisirMot">
+                    <button id="validerSaisie" class = "bouton hover">Valider</button>
                 </div>
-                <div>
-                    <button id="validerSaisie" class = "bouton">Valider</button>
-                </div>
-                <div id = "erreurSaisie"></div>
+                
             </div>
-            <div id = "tentativesRestantes"></div>
+            <div id = "containerTentatives">
+                <div id = "tentativesRestantes"></div>
+            </div>    
             <div id="changerMot"></div>
         </div>
-        <div id = "lettresSaisies"></div>
-        <div id = "motsSaisis"></div>
-        <div id = "regles">
+        <div id = toggleSaisies>
+            <div id="toggleRegles"></div>
+            <div id="saisies">
+                <div id="containerSaisies">
+                    <div id = "lettresSaisies"></div>
+                    <div id = "motsSaisis"></div>
+                </div>    
+            </div>
+        </div>    
+        <div id = "regles" class="containerSecondaire">
             Devine le mot caché portant sur le thème des jeux vidéos.
             Pour cela, saisis une lettre dans la case prévue à cet effet.
             Si la lettre est présente dans le mot caché, elle va s'afficher aux endroits où elle se trouver. Si elle n'est pas présente, tu perds un essai.<br>
@@ -55,7 +69,7 @@
             Si c'est le bon mot tu gagnes, sinon tu perds un essai.<br>
             Attention à ne pas gaspiller tes essais car leur nombre est limité. Si tu n'as pas trouvé le mot après 10 tentatives, tu perds la partie. Amuse-bien et bonne chance!
         </div>
-        <button id="finRegles">Allons-y</button>
+        <button id="finRegles" class="bouton hover">Allons-y</button>
     </div>
     <div id="popup" class = "hidden">
         <div id="textePopup"></div>

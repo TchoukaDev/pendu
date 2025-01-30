@@ -2,9 +2,16 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     background: url(images/background.avif) center /cover no-repeat;
+    color: midnightblue;
+}
+
+:root {
+    --border: 1px solid red;
+    --couleurContainerSecondaire: rgb(248, 227, 227);
+
 }
 
 .container {
@@ -14,19 +21,39 @@ html, body {
     padding: 30px;
     width: 80%;
     text-align: center;
-    background: linear-gradient(45deg, silver, white);
-    border: 2px solid blue;
+    background: linear-gradient(45deg, rgba(248, 227, 227, 0.9), rgba(25, 25, 112, 0.9));
+    border:var(--border);
     border-radius: 15px;
 }
 
 .bouton {
     padding: 10px 15px;
+    background: whitesmoke;
+    border-radius: 10px;
+    border: var(--border);
+    font-weight: bold;
+    background: var(--couleurContainerSecondaire);
+    color: midnightblue;
+}
+
+.hover:hover, #recommencer:hover {
+    cursor: pointer;
+    color: red;
+}
+.containerSecondaire {
+    margin: auto;
+    padding: 10px 20px;
+    width: auto;
+    background: rgb(248, 227, 227);
+    border: var(--border);
+    border-radius: 10px;
 }
 
 #motCachePendu {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
 #motCache {
@@ -39,7 +66,7 @@ html, body {
     text-align: center;
     color: transparent;
     user-select: none;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid midnightblue;
     margin: 15px;
     width: 20px;
     font-size: 3em;
@@ -48,30 +75,33 @@ html, body {
 
 #pendu img{
     height: 200px;
+    border: var(--border);
+    border-radius: 5px;
 }
 
 #bienvenue {
     margin: 50px;
-    padding: 20px;
+    padding: 30px;
     font-size: 2em;
     font-weight: bold;
-
 }
 
-form {
-    padding: 20px;
-    font-size: 1.5em;
+#formulaire {
+    margin: 50px;
+    padding: 30px;
+    font-size: 1.5em;;
 }
 
 #prenomUtilisateur {
     margin-bottom: 40px;
+    margin-left: 20px;
     font-size: 24px;
+    background: whitesmoke;
 }
 
 #validerPrenom {
     font-size: 1em;
 }
-
 
 #inputSaisies {
     flex-grow: 1;
@@ -83,6 +113,10 @@ form {
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+.saisir {
+    padding: 10px;
 }
 
 .hidden {
@@ -97,12 +131,12 @@ form {
     flex-basis: 180px;
 }
 
-#tentativesRestantes {
+.tentativesRestantes {
     padding: 30px;
     flex-grow: 1;
 }
 
-#saisiesTentativesChanger {
+.saisiesTentativesChanger {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -110,16 +144,32 @@ form {
     margin-top: 20px
 }
 
-#lettresSaisies, #motsSaisies {
+.saisies {
     padding: 10px;
 }
 
+#containerSaisies {
+    text-align: left;
+    width: fit-content;
+}
+
 #regles {
+    padding: 20px;
     text-align: justify;
     font-size: 1.5em;
     display: none;
     height: auto;
     overflow: hidden;
+}
+
+#toggleSaisies {
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+}
+
+#saisies {
+    flex-grow: 1;
 }
 
 .toggleRegles {
@@ -140,13 +190,23 @@ form {
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 15%;
-    left: 15%;
-    background: silver;
-    width: 70vw;
-    height: 70vh;
+    top: 10%;
+    left: 10%;
+    width: 80vw;
+    height: 80vh;
+    background: linear-gradient(45deg, var(--couleurContainerSecondaire), midnightblue);
+    border:var(--border);
+    border-radius: 15px;
 }
 
+#textePopup{
+    padding: 20px;
+    border: var(--border);
+    border-radius: 10px;
+    background: var(--couleurContainerSecondaire);
+    font-size: 2em;
+    font-weight: bold;
+}
 
 #boutonRecommencer, #textePopup, #popup img {
     display: block;

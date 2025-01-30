@@ -1,5 +1,5 @@
 const mots = ["console", "manette", "zelda", "mario", "switch", "playstation", "nintendo", "ubisoft", "sony", "microsoft", "minecraft", "sonic", "pokemon", 
-              "television", "Konami", "divertissement", "graphisme", "xbox", "tetris", "multijoueur", "gameplay", "debuff", "craft", "jouabilité", "experience",
+              "television", "Konami", "divertissement", "graphisme", "xbox", "tetris", "multijoueur", "gameplay", "debuff", "craft", "jouabilite", "experience",
               "roguelike", "retrogaming", "speedrun", "succes", "videoludique", "fallout", "metroid", "rayman", "warcraft", "capcom", "activision"];
 let nombreAleatoire;
 const regles            = $("#regles");
@@ -49,10 +49,12 @@ function genererJeu() {
     let inputSaisies = $("#inputSaisies");
     inputSaisies.removeClass("hidden");
     inputSaisies.addClass("inputSaisiesFlex");
+    $("#containerMotCache, #containerSaisir, #containerTentatives, #containerSaisies").addClass("containerSecondaire");
     bienvenue.remove()
     regles.css("display", "none");
     finRegles.remove();          
     $("#pendu").removeClass("hidden");
+    $("#saisiesTentativesChanger").addClass("saisiesTentativesChanger");
     afficherMasquerRegles();
     saisirValeur();
     genererMotCache(mots);
@@ -65,9 +67,11 @@ function genererMotCache(tableau) {
     tableauLettresEssayees = [];
     lettresEssayees = tableauLettresEssayees.join(", ")
     lettresSaisies.text(`Lettres essayées : ${lettresEssayees}`);
+    lettresSaisies.addClass("saisies");
     tableauMotsEssayes = [];
     motsEssayes = tableauMotsEssayes.join(", ");
     motsSaisis.text(`Mots essayés: ${motsEssayes}`);
+    motsSaisis.addClass("saisies");
 
     genererNombreAleatoire(mots.length);
     motCache = tableau[nombreAleatoire].toUpperCase();
@@ -88,15 +92,15 @@ function genererMotCache(tableau) {
 function afficherMasquerRegles() {
     const toggleRegles = $("<button> Afficher les règles </button>").attr("id", "toggleRegles");
     toggleRegles.addClass("bouton");
+    toggleRegles.addClass("hover");
     toggleRegles.addClass("toggleRegles");
-    regles.before(toggleRegles);
+    $("#toggleRegles").append(toggleRegles);
 
     regles.css("font-size", "0.8em")
-    let hauteurRegles = regles.outerHeight();
 
     toggleRegles.click(() => {
         if (toggleRegles.text().includes("Afficher")) {
-            regles.css("height", hauteurRegles).slideDown();
+            regles.slideDown();
             toggleRegles.text("Masquer les règles")
            
         }
@@ -109,8 +113,9 @@ function afficherMasquerRegles() {
 
 function creerChangerMot() {
     const changerMot = $("<button>Changer de mot</button>")
-        .attr("id", "boutonChangerMot")
-        .addClass("bouton");
+        .attr("id", "boutonChangerMot")        
+        .addClass("bouton")
+        .addClass("hover");
     $("#changerMot").append(changerMot);
     changerMot.click(() => {
         nouveauMot();
@@ -136,14 +141,14 @@ function saisirValeur() {
         }
         else {
         erreurSaisie.text("");
-        saisirTentatives();
+        analyserSaisie();
         $("#saisirLettre").val("");
         $("#saisirMot").val("");
         }
     })
 }
 
-function saisirTentatives() {
+function analyserSaisie() {
     erreurSaisie.text("");
 
     if(lettreSaisie !== "") {
@@ -223,14 +228,15 @@ function saisirTentatives() {
 function afficherTentatives(nombre) {
     const idTentativesRestantes = $("#tentativesRestantes");
     idTentativesRestantes.text(`Tentatives restantes: ${nombre}`)
+    idTentativesRestantes.addClass("tentativesRestantes");
     if (tentativesRestantes >= 8) {
         idTentativesRestantes.css("color", "green");        
     }
     else if (tentativesRestantes === 6 || tentativesRestantes === 7) {
-        idTentativesRestantes.css("color", "lightgreen");
+        idTentativesRestantes.css("color", "goldenrod");
     }
     else if (tentativesRestantes <= 5 && tentativesRestantes >= 3) {
-        idTentativesRestantes.css("color", "orange");
+        idTentativesRestantes.css("color", "darkorange");
     }
     else if (tentativesRestantes === 1 || tentativesRestantes === 2) {
         idTentativesRestantes.css("color", "red");
@@ -254,33 +260,49 @@ function genererNombreAleatoire(max) {
      }    
 
 function partiePerdue(message) {
+    const boutonsJeu = $("#validerSaisie, #boutonChangerMot, #toggleRegles");
+    const inputsJeu = $("#saisirLettre, #saisirMot");
     const penduPerdu = $("<img>").attr("src", "images/pendu0.jpg");
     $("#textePopup").before(penduPerdu);
     popup.removeClass("hidden");
     popup.addClass("popup");
     $("#textePopup").text(message)
-    $("#saisirLettre, #saisirMot, #validerSaisie, #boutonChangerMot, #toggleRegles").prop("disabled", true);
+    inputsJeu.prop("disabled", true)
+    boutonsJeu.prop("disabled", true);
+    boutonsJeu.removeClass("hover");
 
     $("#recommencer").click(() => {
-        popup.css("display", "none");
+        popup.removeClass("popup");
+        popup.addClass("hidden");
+        penduPerdu.remove();
         nouveauMot();
-        $("#saisirLettre, #saisirMot,.bouton").prop("disabled", false);
+        inputsJeu.prop("disabled", false);
+        boutonsJeu.prop("disabled", false);
+        boutonsJeu.addClass("hover");
     })
 }
 
 function gagnerPartie(message) {
+    const boutonsJeu = $("#validerSaisie, #boutonChangerMot, #toggleRegles");
+    const inputsJeu = $("#saisirLettre, #saisirMot");
     const penduGagne = $("<img>").attr("src", "images/pendugagne.jpg");
     $("#textePopup").before(penduGagne);
     popup.removeClass("hidden");
     popup.addClass("popup");
     $("#textePopup").text(message)
-    $("#saisirLettre, #saisirMot, #validerSaisie, #boutonChangerMot, #toggleRegles").prop("disabled", true);
+    inputsJeu.prop("disabled", true)
+    boutonsJeu.prop("disabled", true);
+    boutonsJeu.removeClass("hover");
     confettis()
 
     $("#recommencer").click(() => {
-        popup.css("display", "none");
+        popup.removeClass("popup");
+        popup.addClass("hidden");
+        penduGagne.remove();
         nouveauMot();
-        $("#saisirLettre, #saisirMot,.bouton").prop("disabled", false);
+        inputsJeu.prop("disabled", false);
+        boutonsJeu.prop("disabled", false);
+        boutonsJeu.addClass("hover");
     })
     
 };
