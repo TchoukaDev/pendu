@@ -4,18 +4,24 @@ const mots = ["console", "manette", "zelda", "mario", "switch", "playstation", "
 let nombreAleatoire;
 const regles            = $("#regles");
 const formulaire        = $("form");
-let motCache
+const popup = $("#popup");
+let motCache;
 let motEpele;
 let lettreSaisie;
+const lettresSaisies = $("#lettresSaisies");
+const motsSaisis = $("#motsSaisis");
+let tableauLettresEssayees;
+let tableauMotsEssayes;
+let motsEssayes;
+let lettresEssayees;
 let motSaisi;
-let indexMot = -1;
+let indexMot            = 0;
 let tentativesRestantes;
 
 formulaire.submit((event)=> {
     event.preventDefault()
     
     const prenomUtilisateur = $("#prenomUtilisateur").val().trim();
-    console.log.prenomUtilisateur;
     const erreurPrenom           = $("#erreurPrenom");
 
     if (prenomUtilisateur === "") {
@@ -30,6 +36,7 @@ formulaire.submit((event)=> {
         erreurPrenom.remove();
         regles.css("display", "block");
         finRegles.css("display", "block");
+
         finRegles.click(() => {
         genererJeu();
         }
@@ -38,29 +45,38 @@ formulaire.submit((event)=> {
 })
 
 function genererJeu() {
+
+    let inputSaisies = $("#inputSaisies");
+    inputSaisies.removeClass("hidden");
+    inputSaisies.addClass("inputSaisiesFlex");
     bienvenue.remove()
     regles.css("display", "none");
-    finRegles.remove();
-    $("#inputSaisies").css("display", "block");      
-    $("#pendu").css("display", "block");
+    finRegles.remove();          
+    $("#pendu").removeClass("hidden");
     afficherMasquerRegles();
-    verifierSaisie();
+    saisirValeur();
     genererMotCache(mots);
     creerChangerMot();   
 }
 
 function genererMotCache(tableau) {
+    // Réinitialiser tout//
     tentativesRestantes = 10;
+    tableauLettresEssayees = [];
+    lettresEssayees = tableauLettresEssayees.join(", ")
+    lettresSaisies.text(`Lettres essayées : ${lettresEssayees}`);
+    tableauMotsEssayes = [];
+    motsEssayes = tableauMotsEssayes.join(", ");
+    motsSaisis.text(`Mots essayés: ${motsEssayes}`);
+
     genererNombreAleatoire(mots.length);
     motCache = tableau[nombreAleatoire].toUpperCase();
-    console.log(motCache)
     motEpele = [...motCache];
-    console.log(motEpele);
 
     motEpele.forEach ((lettre, index) => {
         const span   = $("<span></span>")
         span.text(lettre)
-        span.addClass("hidden");
+        span.addClass("transparent");
         $("#motCache").append(span);
         span.attr("id", `span${lettre}${index}`)
         }
@@ -70,15 +86,19 @@ function genererMotCache(tableau) {
 }
 
 function afficherMasquerRegles() {
-    const toggleRegles = $("<button> Afficher les règles </button>");
+    const toggleRegles = $("<button> Afficher les règles </button>").attr("id", "toggleRegles");
+    toggleRegles.addClass("bouton");
     toggleRegles.addClass("toggleRegles");
     regles.before(toggleRegles);
 
+    regles.css("font-size", "0.8em")
+    let hauteurRegles = regles.outerHeight();
+
     toggleRegles.click(() => {
         if (toggleRegles.text().includes("Afficher")) {
-            regles.slideDown();
+            regles.css("height", hauteurRegles).slideDown();
             toggleRegles.text("Masquer les règles")
-            regles.css("font-size", "1em")
+           
         }
         else {
             regles.slideUp();
@@ -88,26 +108,31 @@ function afficherMasquerRegles() {
 }
 
 function creerChangerMot() {
-    const nouveauMot = $("<button>Changer de mot</button>");
-    $("#changerMot").append(nouveauMot);
-    nouveauMot.click(() => {
-        genererNombreAleatoire();
-        $("span").remove();
-        genererMotCache(mots);
+    const changerMot = $("<button>Changer de mot</button>")
+        .attr("id", "boutonChangerMot")
+        .addClass("bouton");
+    $("#changerMot").append(changerMot);
+    changerMot.click(() => {
+        nouveauMot();
     })
 }
 
+function nouveauMot() {
+    genererNombreAleatoire(mots.length);
+    $("span").remove();
+    genererMotCache(mots);
+}
 
-function verifierSaisie() {
-     $("#validerLettre, #validerMot").click(() => {
+function saisirValeur() {
+
+     $("#validerSaisie").click(() => {
 
         erreurSaisie = $("#erreurSaisie")
         motSaisi     = $("#saisirMot").val().trim();
         lettreSaisie = $("#saisirLettre").val().trim();
 
-        if (lettreSaisie === "" && motSaisi === "") {
+        if ((lettreSaisie === "" && motSaisi === "") || (lettreSaisie !== "" && motSaisi !== "")) {
         erreurSaisie.text("Veuillez saisir une lettre ou un mot");
-        erreurSaisie.css("color", "red");
         }
         else {
         erreurSaisie.text("");
@@ -119,6 +144,9 @@ function verifierSaisie() {
 }
 
 function saisirTentatives() {
+    erreurSaisie.text("");
+
+    if(lettreSaisie !== "") {
         if (lettreSaisie === "é" || lettreSaisie === "è" || lettreSaisie === "ê" || lettreSaisie === "ë") {
             lettreSaisie = "e";
         }
@@ -138,41 +166,59 @@ function saisirTentatives() {
             lettreSaisie = "c";
         }
         lettreSaisie = lettreSaisie.toUpperCase();
+
+        if(!tableauLettresEssayees.includes(lettreSaisie)) {
+
+            tableauLettresEssayees.push(lettreSaisie);
+            lettresEssayees = tableauLettresEssayees.join(", ")
+            lettresSaisies.text(`Lettres essayées : ${lettresEssayees}`);
+            
+            let positionsLettre = []
+
         
-        let positionsLettre = []
 
-    motEpele.forEach((lettre, index) => {
-        if (lettre === lettreSaisie) {
-            positionsLettre.push(index);
-        }
-    })
-
-        if (positionsLettre.length > 0) {
-            positionsLettre.forEach((position) => {
-            let lettreDevoilee = $(`#span${lettreSaisie}${position}`);
-            lettreDevoilee.css("color", "black");
+            motEpele.forEach((lettre, index) => {
+                if (lettre === lettreSaisie) {
+                    positionsLettre.push(index);
+                }
             })
-        }
-        else {
-            tentativesRestantes --;
-            afficherTentatives(tentativesRestantes);
-            etatPendu(tentativesRestantes);
-        }
 
-    $("#validerMot").click(() => {
+            if (positionsLettre.length > 0) {
+                positionsLettre.forEach((position) => {
+                let lettreDevoilee = $(`#span${lettreSaisie}${position}`);
+                lettreDevoilee.css("color", "black")
+                VerificationLettresDevoilees();
+                })
+            }
+            else {
+                tentativesRestantes --;
+                afficherTentatives(tentativesRestantes);
+                etatPendu(tentativesRestantes);
+                }
+            }
+        
+        else {
+            erreurSaisie.text("Vous avez déjà essayé cette lettre.");
+        }
+    }
+    else if(motSaisi != "") {
         motSaisi = motSaisi.toUpperCase();
-
         if (motSaisi === motCache) {
-            // gagnerPartie();
+            gagnerPartie("Félicitations, vous avez gagné!");
+        }
+        else if (tableauMotsEssayes.includes(motSaisi)) {
+            erreurSaisie.text("Vous avez déjà essayé ce mot");
         }
         else {
-        tentativesRestantes --
+        tableauMotsEssayes.push(motSaisi);
+        motsEssayes = tableauMotsEssayes.join(", ");
+        motsSaisis.text(`Mots essayés: ${motsEssayes}`);
+        tentativesRestantes --;
         afficherTentatives(tentativesRestantes);
         etatPendu(tentativesRestantes);
-        }
-    
-    })
-     }
+    }
+    }
+} 
 
 function afficherTentatives(nombre) {
     const idTentativesRestantes = $("#tentativesRestantes");
@@ -190,13 +236,12 @@ function afficherTentatives(nombre) {
         idTentativesRestantes.css("color", "red");
     }
     else {
-        // PartiePerdue();
+        partiePerdue(`Dommage, vous avez perdu! Le mot secret était ${motCache}.`);
     }
 }
 
 function etatPendu(nombre) {
     $("#imagePendu").attr("src", `images/pendu${nombre}.jpg`);
-    console.log(`Changement de l'image : pendu${nombre}.jpg`);
 }
 
 function genererNombreAleatoire(max) {
@@ -207,3 +252,77 @@ function genererNombreAleatoire(max) {
         indexMot = nombreAleatoire;
         return nombreAleatoire
      }    
+
+function partiePerdue(message) {
+    const penduPerdu = $("<img>").attr("src", "images/pendu0.jpg");
+    $("#textePopup").before(penduPerdu);
+    popup.removeClass("hidden");
+    popup.addClass("popup");
+    $("#textePopup").text(message)
+    $("#saisirLettre, #saisirMot, #validerSaisie, #boutonChangerMot, #toggleRegles").prop("disabled", true);
+
+    $("#recommencer").click(() => {
+        popup.css("display", "none");
+        nouveauMot();
+        $("#saisirLettre, #saisirMot,.bouton").prop("disabled", false);
+    })
+}
+
+function gagnerPartie(message) {
+    const penduGagne = $("<img>").attr("src", "images/pendugagne.jpg");
+    $("#textePopup").before(penduGagne);
+    popup.removeClass("hidden");
+    popup.addClass("popup");
+    $("#textePopup").text(message)
+    $("#saisirLettre, #saisirMot, #validerSaisie, #boutonChangerMot, #toggleRegles").prop("disabled", true);
+    confettis()
+
+    $("#recommencer").click(() => {
+        popup.css("display", "none");
+        nouveauMot();
+        $("#saisirLettre, #saisirMot,.bouton").prop("disabled", false);
+    })
+    
+};
+
+function VerificationLettresDevoilees() {
+    let compteurLettre = 0
+    
+    motEpele.forEach((lettre, index) => {
+        let spanLettre = $(`#span${lettre}${index}`);
+        if ((spanLettre).css("color") === "rgb(0, 0, 0)") {
+            compteurLettre ++
+        }
+    })
+
+    if (compteurLettre === motEpele.length){
+        gagnerPartie("Félicitations, vous avez gagné!");
+    }
+}
+
+
+function confettis(){
+    var end = Date.now() + (5 * 1000);
+    var colors = ['#bb0000', '#ffffff'];
+
+    (function frame() {
+    confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: colors
+    });
+    confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: colors
+    });
+
+    if (Date.now() < end) {
+        requestAnimationFrame(frame);
+    }
+    }())
+}
