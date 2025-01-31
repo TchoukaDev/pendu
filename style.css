@@ -17,7 +17,7 @@ html, body {
 .container {
     display: flex;
     flex-direction: column;
-    margin: auto auto;
+    margin: auto;
     padding: 30px;
     width: 80%;
     text-align: center;
@@ -26,57 +26,12 @@ html, body {
     border-radius: 15px;
 }
 
-.bouton {
-    padding: 10px 15px;
-    background: whitesmoke;
-    border-radius: 10px;
-    border: var(--border);
-    font-weight: bold;
-    background: var(--couleurContainerSecondaire);
-    color: midnightblue;
-}
-
-.hover:hover, #recommencer:hover {
-    cursor: pointer;
-    color: red;
-}
 .containerSecondaire {
     margin: auto;
     padding: 10px 20px;
-    width: auto;
     background: rgb(248, 227, 227);
     border: var(--border);
     border-radius: 10px;
-}
-
-#motCachePendu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-#motCache {
-    flex-grow: 1;
-    text-align: center;
-}
-
-.transparent{
-    display: inline-block;
-    text-align: center;
-    color: transparent;
-    user-select: none;
-    border-bottom: 2px solid midnightblue;
-    margin: 15px;
-    width: 20px;
-    font-size: 3em;
-}
-
-
-#pendu img{
-    height: 200px;
-    border: var(--border);
-    border-radius: 5px;
 }
 
 #bienvenue {
@@ -93,8 +48,7 @@ html, body {
 }
 
 #prenomUtilisateur {
-    margin-bottom: 40px;
-    margin-left: 20px;
+    margin: 40px 20px;
     font-size: 24px;
     background: whitesmoke;
 }
@@ -103,8 +57,60 @@ html, body {
     font-size: 1em;
 }
 
-#inputSaisies {
+.bouton {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: var(--border);
+    font-weight: bold;
+    background: var(--couleurContainerSecondaire);
+    color: midnightblue;
+}
+
+.hover:hover, #recommencer:hover {
+    cursor: pointer;
+    color: red;
+}
+
+
+#motCachePendu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+#motCache {
     flex-grow: 1;
+    text-align: center;
+}
+
+/* Lettres cachées */
+.transparent{
+    display: inline-block;
+    text-align: center;
+    color: transparent;
+    user-select: none;
+    border-bottom: 2px solid midnightblue;
+    margin: 15px;
+    width: 20px;
+    font-size: 3em;
+}
+
+/* Divs cachés */
+.hidden {
+    display: none;
+}
+
+
+#pendu img{
+    height: 200px;
+    border: var(--border);
+    border-radius: 5px;
+}
+
+
+#inputSaisies {
+    flex-grow: 0.7;
 }
 
 .inputSaisiesFlex {
@@ -115,12 +121,8 @@ html, body {
     gap: 20px;
 }
 
-.saisir {
-    padding: 10px;
-}
-
-.hidden {
-    display: none;
+.saisir, .saisies {
+    padding: 5px;
 }
 
 #erreurSaisie {
@@ -131,21 +133,13 @@ html, body {
     flex-basis: 180px;
 }
 
-.tentativesRestantes {
-    padding: 30px;
-    flex-grow: 1;
-}
-
 .saisiesTentativesChanger {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: nowrap;
-    margin-top: 20px
-}
-
-.saisies {
-    padding: 10px;
+    margin-top: 20px;
+    gap: 20px;
 }
 
 #containerSaisies {
@@ -158,7 +152,6 @@ html, body {
     text-align: justify;
     font-size: 1.5em;
     display: none;
-    height: auto;
     overflow: hidden;
 }
 
@@ -191,8 +184,8 @@ html, body {
     align-items: center;
     position: fixed;
     top: 10%;
-    left: 10%;
-    width: 80vw;
+    left: 5%;
+    width: 90vw;
     height: 80vh;
     background: linear-gradient(45deg, var(--couleurContainerSecondaire), midnightblue);
     border:var(--border);
