@@ -172,7 +172,7 @@ function partiePerdue(message) {
 }
 
 function partieGagnee(message) {
-    const penduGagne = $("<img>").attr("src", "images/penduGagne.jpg");
+    const penduGagne = $("<img>").attr("src", "images/penduGain.jpg");
     $("#textePopup").before(penduGagne);
     desactiverElements(inputsJeu);
     desactiverElements(boutonsJeu);
