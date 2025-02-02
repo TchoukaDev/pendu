@@ -165,14 +165,14 @@ function afficherTentatives(nombre, mot) {
 }
 
 function partiePerdue(message) {
-    const penduPerdu = $("<img>").attr("src", "images/pendu0.jpg");
+    const penduPerdu = $("<img>").attr("src", "images/pendu0.jpg").attr("alt", "Image du pendu complet")
     $("#textePopup").before(penduPerdu);
     afficherPopup(message);
     recommencer(penduPerdu);
 }
 
 function partieGagnee(message) {
-    const penduGagne = $("<img>").attr("src", "images/penduGain.jpg");
+    const penduGagne = $("<img>").attr("src", "images/penduGain.jpg").attr("alt", "Image du pendu décroché");
     $("#textePopup").before(penduGagne);
     desactiverElements(inputsJeu);
     desactiverElements(boutonsJeu);

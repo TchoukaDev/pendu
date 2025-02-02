@@ -43,7 +43,7 @@ export function normaliserMot(mot) {
 
 
 export function etatPendu(nombre) {
-    $("#imagePendu").attr("src", `images/pendu${nombre}.jpg`);
+    $("#imagePendu").attr("src", `images/pendu${nombre}.jpg`).attr("alt", `Image du pendu avec ${nombre} tentatives restantes`);
 }
 
 export function creerChangerMot() {
