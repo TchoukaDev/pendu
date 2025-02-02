@@ -136,7 +136,15 @@ html, body {
     gap: 20px;
 }
 
-.saisir, .saisies {
+#containerSaisir {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    gap: 5px;
+}
+
+.saisieLettre, .saisieMot {
     padding: 5px;
 }
 
@@ -157,7 +165,7 @@ html, body {
     gap: 20px;
 }
 
-#containerSaisies {
+#containerReponses {
     display: none;
     text-align: left;
     width: fit-content;

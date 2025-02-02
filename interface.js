@@ -5,7 +5,7 @@ export function afficherStyleJeu() {
     let inputSaisies = $("#inputSaisies");
     inputSaisies.removeClass("hidden");
     inputSaisies.addClass("inputSaisiesFlex");
-    $("#containerMotCache, #containerSaisir, #containerTentatives, #containerSaisies").addClass("containerSecondaire");
+    $("#containerMotCache, #containerSaisir, #containerTentatives, #containerReponses").addClass("containerSecondaire");
     bienvenue.remove()
     regles.css("display", "none");
     finRegles.remove();          

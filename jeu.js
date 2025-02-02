@@ -71,7 +71,7 @@ function verifier() {
     $("#saisirMot").val("");
     erreurSaisie.text("");
     
-    $("#containerSaisies").css("display", "block");
+    $("#containerReponses").css("display", "block");
 
     // Transformer lettres spéciales en lettres simples, puis en majuscules
     if (lettreSaisie !== "") {
