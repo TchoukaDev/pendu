@@ -48,12 +48,13 @@ html, body {
 }
 
 #prenomUtilisateur {
-    margin: 40px 20px;
+    margin: 20px;
     font-size: 24px;
     background: whitesmoke;
 }
 
 #validerPrenom {
+    margin: 20px;
     font-size: 1em;
 }
 
@@ -68,7 +69,8 @@ html, body {
 
 .hover:hover, #recommencer:hover {
     cursor: pointer;
-    color: red;
+    background: midnightblue;
+    color: whitesmoke;
 }
 
 
@@ -96,7 +98,7 @@ html, body {
     font-size: 3em;
 }
 
-/* Divs cachés */
+/* Divs cachées */
 .hidden {
     display: none;
 }
@@ -143,6 +145,7 @@ html, body {
 }
 
 #containerSaisies {
+    display: none;
     text-align: left;
     width: fit-content;
 }

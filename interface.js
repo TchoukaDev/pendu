@@ -1,0 +1,69 @@
+import { regles, finRegles, boutonsJeu, bienvenue } from "./globales.js";
+
+
+export function afficherStyleJeu() {
+    let inputSaisies = $("#inputSaisies");
+    inputSaisies.removeClass("hidden");
+    inputSaisies.addClass("inputSaisiesFlex");
+    $("#containerMotCache, #containerSaisir, #containerTentatives, #containerSaisies").addClass("containerSecondaire");
+    bienvenue.remove()
+    regles.css("display", "none");
+    finRegles.remove();          
+    $("#pendu").removeClass("hidden");
+    $("#saisiesTentativesChanger").addClass("saisiesTentativesChanger");
+}
+
+export function afficherReponsesEssayees (tableau, div, message) {
+    const essais = tableau.join(", ")
+    div.text(`${message} ${essais}`);
+    div.addClass("saisies");
+}
+
+export function activerElements(element) {
+    element.prop("disabled", false)
+}
+
+export function desactiverElements(element){
+    element.prop("disabled", true)
+}
+
+export function afficherPopup(message) {
+    $("#popup").removeClass("hidden");
+    $("#popup").addClass("popup");
+    $("#textePopup").text(message);
+    boutonsJeu.removeClass("hover");
+}
+
+export function cacherPopup(image) {
+    const popup             = $("#popup");
+    popup.removeClass("popup");
+    popup.addClass("hidden");
+    image.remove();
+}
+
+
+export function confettis(){
+    var end = Date.now() + (5 * 1000);
+    var colors = ['#bb0000', '#ffffff'];
+
+    (function frame() {
+    confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: colors
+    });
+    confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: colors
+    });
+
+    if (Date.now() < end) {
+        requestAnimationFrame(frame);
+    }
+    }())
+}

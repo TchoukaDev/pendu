@@ -1,9 +1,22 @@
-export const regles     = $("#regles");
-export const boutonsJeu = $("#validerSaisie, #boutonChangerMot, #toggleRegles");
+import { regles, finRegles, bienvenue, formulaire } from "./globales.js";
+import { genererMotCache } from "./jeu.js";
+import { mots } from "./globales.js";
+
+
+
 export let nombreAleatoire;
+let indexMot = 0; 
+
+export function afficherRegles(prenom) {
+    const erreurPrenom = $("#erreurPrenom");
+    bienvenue.html(`Bonjour ${prenom}. Voici les règles du jeu:`);
+    formulaire.remove();
+    erreurPrenom.remove();
+    regles.css("display", "block");
+    finRegles.css("display", "block");
+}
 
 export function genererNombreAleatoire(max) {
-    let indexMot = 0; 
     do {
     nombreAleatoire = Math.floor(Math.random() * Math.floor(max))
     }
@@ -11,6 +24,22 @@ export function genererNombreAleatoire(max) {
     indexMot = nombreAleatoire;
     return nombreAleatoire
 }    
+
+export function normaliserLettre(lettre) {
+    const mapping = {
+        "é": "e", "è": "e", "ê": "e", "ë": "e",
+        "à": "a", "â": "a", "ä": "a",
+        "ô": "o", "ö": "o",
+        "î": "i", "ï": "i",
+        "û": "u", "ù": "u", "ü": "u",
+        "ç": "c"
+    };
+    return mapping[lettre] || lettre;
+}
+
+export function normaliserMot(mot) {
+    return mot.split('').map(normaliserLettre).join(''); // Isoler chaque lettre pour la normaliser puis recréer le mot
+}
 
 
 export function etatPendu(nombre) {
@@ -34,7 +63,7 @@ export function slideRegles() {
     toggleRegles.addClass("bouton");
     toggleRegles.addClass("hover");
     toggleRegles.addClass("toggleRegles");
-    $("#toggleRegles").append(toggleRegles);
+    $("#containerToggleRegles").append(toggleRegles);
     regles.css("font-size", "0.8em")
 
     toggleRegles.click(() => {
@@ -50,36 +79,3 @@ export function slideRegles() {
     })
 }
 
-export function afficherPopup(message) {
-    $("#popup").removeClass("hidden");
-    $("#popup").addClass("popup");
-    $("#textePopup").text(message);
-    boutonsJeu.removeClass("hover");
-}
-
-
-export function confettis(){
-    var end = Date.now() + (5 * 1000);
-    var colors = ['#bb0000', '#ffffff'];
-
-    (function frame() {
-    confetti({
-        particleCount: 2,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: colors
-    });
-    confetti({
-        particleCount: 2,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: colors
-    });
-
-    if (Date.now() < end) {
-        requestAnimationFrame(frame);
-    }
-    }())
-}

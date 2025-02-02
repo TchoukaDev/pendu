@@ -1,29 +1,28 @@
-import { genererJeu } from "./module.js";
-import { regles } from "./fonctionsAnnexes.js";
-
-const formulaire        = $("form");
-
+import {genererMotCache, saisirValeur} from "./jeu.js";
+import {slideRegles, creerChangerMot, afficherRegles} from "./fonctionsAnnexes.js";
+import { afficherStyleJeu } from "./interface.js";
+import { erreurSaisiePrenom } from "./erreurs.js";
+import { finRegles, formulaire, mots } from "./globales.js";
 
 formulaire.submit((event)=> {
     event.preventDefault()
     
-    const prenomUtilisateur = $("#prenomUtilisateur").val().trim();
-    const erreurPrenom           = $("#erreurPrenom");
+    let prenomUtilisateur = $("#prenomUtilisateur").val().trim();
 
     if (prenomUtilisateur === "") {
-        erreurPrenom.text("Merci de saisir un prénom valide.");
-        erreurPrenom.css("color", "red");
+        let erreurPrenom = $("#erreurPrenom");
+        erreurSaisiePrenom(erreurPrenom);
     }
     else {              
-        const bienvenue = $("#bienvenue")
-        const finRegles = $("#finRegles")
-        bienvenue.html(`Bonjour ${prenomUtilisateur}. Voici les règles du jeu:`);
-        formulaire.remove();
-        erreurPrenom.remove();
-        regles.css("display", "block");
-        finRegles.css("display", "block");
+        afficherRegles(prenomUtilisateur);
+
         finRegles.click(() => {
-        genererJeu();
+
+        afficherStyleJeu();
+        genererMotCache(mots);
+        saisirValeur();
+        creerChangerMot();
+        slideRegles();
         }
         )
     }
