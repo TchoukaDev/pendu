@@ -200,6 +200,10 @@ html, body {
     font-size: 1.3em;
 }
 
+#copyright {
+    text-align: right;
+    color: var(--couleurContainerSecondaire);
+}
 
 .popup {
     display: flex;
