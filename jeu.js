@@ -1,7 +1,7 @@
 import { etatPendu, genererNombreAleatoire, nombreAleatoire, normaliserLettre, normaliserMot} from "./fonctionsAnnexes.js";
 import { erreurSaisieIncorrecte } from "./erreurs.js";
-import { afficherPopup, cacherPopup, activerElements, desactiverElements, confettis, afficherReponsesEssayees } from "./interface.js"
-import { boutonsJeu, inputsJeu, mots, erreurSaisie, lettresSaisies, motsSaisis } from "./globales.js";
+import { afficherPopup, cacherPopup, confettis, afficherReponsesEssayees } from "./interface.js"
+import { mots, erreurSaisie, lettresSaisies, motsSaisis } from "./globales.js";
 
 let motEpele;
 let tableauLettresEssayees
@@ -174,8 +174,6 @@ function partiePerdue(message) {
 function partieGagnee(message) {
     const penduGagne = $("<img>").attr("src", "images/penduGain.jpg").attr("alt", "Image du pendu décroché");
     $("#textePopup").before(penduGagne);
-    desactiverElements(inputsJeu);
-    desactiverElements(boutonsJeu);
     afficherPopup(message);
     confettis();
     recommencer(penduGagne);
@@ -189,9 +187,6 @@ function recommencer(image) {
         $("span").remove();
         cacherPopup(image);     
         genererMotCache(mots);
-        activerElements(inputsJeu);
-        activerElements(boutonsJeu);
-        boutonsJeu.addClass("hover");
     })
 }
 

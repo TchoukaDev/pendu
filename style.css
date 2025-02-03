@@ -232,10 +232,10 @@ input {
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 10%;
-    left: 5%;
-    width: 90vw;
-    height: 80vh;
+    top: 20%;
+    left: 15%;
+    width: 70vw;
+    height: 60vh;
     background: linear-gradient(45deg, var(--couleurContainerSecondaire), midnightblue);
     border:var(--border);
     border-radius: 15px;

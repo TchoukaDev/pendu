@@ -1,4 +1,4 @@
-import { regles, finRegles, boutonsJeu, bienvenue } from "./globales.js";
+import { regles, finRegles, bienvenue } from "./globales.js";
 
 
 export function afficherStyleJeu() {
@@ -19,26 +19,18 @@ export function afficherReponsesEssayees (tableau, div, message) {
     div.addClass("saisies");
 }
 
-export function activerElements(element) {
-    element.prop("disabled", false)
-}
-
-export function desactiverElements(element){
-    element.prop("disabled", true)
-}
-
 export function afficherPopup(message) {
     $("#popup").removeClass("hidden");
     $("#popup").addClass("popup");
     $("#textePopup").text(message);
-    boutonsJeu.removeClass("hover");
+    $(".container").css("display", "none");
 }
 
 export function cacherPopup(image) {
     const popup             = $("#popup");
     popup.removeClass("popup");
     popup.addClass("hidden");
-    image.remove();
+    $(".container").css("display", "flex");
 }
 
 
