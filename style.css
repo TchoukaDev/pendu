@@ -265,6 +265,8 @@ input {
 }
 
 #popup img {
+    border: var(--border);
+    border-radius: 5px;
     box-shadow: 5px 5px 8px 2px;
     -webkit-box-shadow: 5px 5px 8px 2px;
     -moz-box-shadow: 5px 5px 8px 2px;
