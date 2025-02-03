@@ -34,6 +34,9 @@ input {
     background: linear-gradient(45deg, rgba(248, 227, 227, 0.9), rgba(25, 25, 112, 0.9));
     border:var(--border);
     border-radius: 15px;
+    box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.5) inset;
+    -webkit-box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.5) inset;
+    -moz-box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.5) inset;
 }
 
 .containerSecondaire {
@@ -233,12 +236,15 @@ input {
     align-items: center;
     position: fixed;
     top: 20%;
-    left: 15%;
-    width: 70vw;
+    left: 25%;
+    width: 50vw;
     height: 60vh;
     background: linear-gradient(45deg, var(--couleurContainerSecondaire), midnightblue);
     border:var(--border);
     border-radius: 15px;
+    box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.5) inset;
+    -webkit-box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.5) inset;
+    -moz-box-shadow: 5px 5px 5px 1px rgba(0,0,0,0.5) inset;
 }
 
 #textePopup{
@@ -246,6 +252,7 @@ input {
     border: var(--border);
     border-radius: 10px;
     background: var(--couleurContainerSecondaire);
+    text-align: center;
     font-size: 2em;
     font-weight: bold;
     box-shadow: 5px 5px 8px 2px;

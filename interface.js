@@ -30,6 +30,7 @@ export function cacherPopup(image) {
     const popup             = $("#popup");
     popup.removeClass("popup");
     popup.addClass("hidden");
+    image.remove();
     $(".container").css("display", "flex");
 }
 
