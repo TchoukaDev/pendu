@@ -127,6 +127,7 @@ function verifier() {
 
 
 function VerificationLettresDevoilees() {
+    setTimeout(() => {
     let compteurLettre = 0
 
     //Gagner partie si toutes les lettres sont dévoilées
@@ -140,6 +141,7 @@ function VerificationLettresDevoilees() {
     if (compteurLettre === motEpele.length){
         partieGagnee("Félicitations, vous avez gagné!");
     }
+},600)
 }
 
 function afficherTentatives(nombre, mot) {
