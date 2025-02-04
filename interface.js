@@ -21,6 +21,7 @@ export function afficherReponsesEssayees (tableau, div, message) {
 
 export function afficherPopup(message) {
     $("#popup").removeClass("hidden");
+    $("#popup").removeClass("slideup");
     $("#popup").addClass("popup");
     $("#textePopup").text(message);
     $(".container").css("display", "none");
@@ -28,10 +29,14 @@ export function afficherPopup(message) {
 
 export function cacherPopup(image) {
     const popup             = $("#popup");
+    popup.addClass("slideup");
+    setTimeout(() => {
     popup.removeClass("popup");
     popup.addClass("hidden");
     image.remove();
     $(".container").css("display", "flex");
+    }, 600);
+    
 }
 
 

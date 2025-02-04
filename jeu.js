@@ -95,6 +95,7 @@ function verifier() {
             if (positionsLettre.length > 0) {
                 positionsLettre.forEach((position) => {
                     let lettreDevoilee = $(`#span${lettreSaisie}${position}`);
+                    lettreDevoilee.addClass("lettreAnimee");
                     lettreDevoilee.css("color", "midnightblue").css("border-bottom", "none");
                 });
                 VerificationLettresDevoilees();
